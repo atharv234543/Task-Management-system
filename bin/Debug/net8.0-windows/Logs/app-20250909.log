@@ -1,0 +1,155 @@
+2025-09-09 08:59:11.840 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "type" = 'table' AND "rootpage" IS NOT NULL;
+2025-09-09 08:59:12.101 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Users" AS "u")
+2025-09-09 08:59:22.412 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__username_0='?' (Size = 5)], CommandType='"Text"', CommandTimeout='30']
+SELECT "u"."Id", "u"."ManagerId", "u"."PasswordHash", "u"."Role", "u"."Username"
+FROM "Users" AS "u"
+WHERE "u"."Username" = @__username_0
+LIMIT 1
+2025-09-09 08:59:22.702 +05:30 [INF] User super authenticated as "SuperUser"
+2025-09-09 08:59:22.767 +05:30 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-09-09 08:59:22.786 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."AssignedUserId", "t"."CreatedAtUtc", "t"."Description", "t"."DueAtUtc", "t"."Priority", "t"."Status", "t"."Title", "u"."Id", "u"."ManagerId", "u"."PasswordHash", "u"."Role", "u"."Username", "c"."Id", "c"."AuthorId", "c"."AuthorUserId", "c"."CreatedAtUtc", "c"."TaskItemId", "c"."Text", "h"."Id", "h"."Action", "h"."ActorUserId", "h"."AtUtc", "h"."MetadataJson", "h"."TaskItemId"
+FROM "Tasks" AS "t"
+INNER JOIN "Users" AS "u" ON "t"."AssignedUserId" = "u"."Id"
+LEFT JOIN "Comments" AS "c" ON "t"."Id" = "c"."TaskItemId"
+LEFT JOIN "History" AS "h" ON "t"."Id" = "h"."TaskItemId"
+ORDER BY "t"."CreatedAtUtc", "t"."Id", "u"."Id", "c"."Id"
+2025-09-09 08:59:22.827 +05:30 [INF] Loaded 4 tasks for user super
+2025-09-09 08:59:22.832 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "u"."Id", "u"."ManagerId", "u"."PasswordHash", "u"."Role", "u"."Username"
+FROM "Users" AS "u"
+2025-09-09 08:59:22.897 +05:30 [INF] User super logged in
+2025-09-09 08:59:42.552 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."AssignedUserId", "t"."CreatedAtUtc", "t"."Description", "t"."DueAtUtc", "t"."Priority", "t"."Status", "t"."Title", "u"."Id", "u"."ManagerId", "u"."PasswordHash", "u"."Role", "u"."Username", "c"."Id", "c"."AuthorId", "c"."AuthorUserId", "c"."CreatedAtUtc", "c"."TaskItemId", "c"."Text", "h"."Id", "h"."Action", "h"."ActorUserId", "h"."AtUtc", "h"."MetadataJson", "h"."TaskItemId"
+FROM "Tasks" AS "t"
+INNER JOIN "Users" AS "u" ON "t"."AssignedUserId" = "u"."Id"
+LEFT JOIN "Comments" AS "c" ON "t"."Id" = "c"."TaskItemId"
+LEFT JOIN "History" AS "h" ON "t"."Id" = "h"."TaskItemId"
+ORDER BY "t"."CreatedAtUtc", "t"."Id", "u"."Id", "c"."Id"
+2025-09-09 08:59:42.553 +05:30 [INF] Loaded 4 tasks for user super
+2025-09-09 08:59:44.324 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."AssignedUserId", "t"."CreatedAtUtc", "t"."Description", "t"."DueAtUtc", "t"."Priority", "t"."Status", "t"."Title", "u"."Id", "u"."ManagerId", "u"."PasswordHash", "u"."Role", "u"."Username", "c"."Id", "c"."AuthorId", "c"."AuthorUserId", "c"."CreatedAtUtc", "c"."TaskItemId", "c"."Text", "h"."Id", "h"."Action", "h"."ActorUserId", "h"."AtUtc", "h"."MetadataJson", "h"."TaskItemId"
+FROM "Tasks" AS "t"
+INNER JOIN "Users" AS "u" ON "t"."AssignedUserId" = "u"."Id"
+LEFT JOIN "Comments" AS "c" ON "t"."Id" = "c"."TaskItemId"
+LEFT JOIN "History" AS "h" ON "t"."Id" = "h"."TaskItemId"
+ORDER BY "t"."CreatedAtUtc", "t"."Id", "u"."Id", "c"."Id"
+2025-09-09 08:59:44.324 +05:30 [INF] Loaded 4 tasks for user super
+2025-09-09 09:00:22.745 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__dueWindow_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."AssignedUserId", "t"."CreatedAtUtc", "t"."Description", "t"."DueAtUtc", "t"."Priority", "t"."Status", "t"."Title"
+FROM "Tasks" AS "t"
+WHERE "t"."DueAtUtc" IS NOT NULL AND "t"."DueAtUtc" <= @__dueWindow_0 AND "t"."Status" <> 3
+2025-09-09 09:00:22.779 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__AddMinutes_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT DISTINCT "h"."TaskItemId"
+FROM "History" AS "h"
+WHERE instr("h"."Action", 'Status') > 0 AND "h"."AtUtc" >= @__AddMinutes_0
+2025-09-09 09:01:22.722 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__dueWindow_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."AssignedUserId", "t"."CreatedAtUtc", "t"."Description", "t"."DueAtUtc", "t"."Priority", "t"."Status", "t"."Title"
+FROM "Tasks" AS "t"
+WHERE "t"."DueAtUtc" IS NOT NULL AND "t"."DueAtUtc" <= @__dueWindow_0 AND "t"."Status" <> 3
+2025-09-09 09:01:22.723 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__AddMinutes_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT DISTINCT "h"."TaskItemId"
+FROM "History" AS "h"
+WHERE instr("h"."Action", 'Status') > 0 AND "h"."AtUtc" >= @__AddMinutes_0
+2025-09-09 09:02:22.718 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__dueWindow_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."AssignedUserId", "t"."CreatedAtUtc", "t"."Description", "t"."DueAtUtc", "t"."Priority", "t"."Status", "t"."Title"
+FROM "Tasks" AS "t"
+WHERE "t"."DueAtUtc" IS NOT NULL AND "t"."DueAtUtc" <= @__dueWindow_0 AND "t"."Status" <> 3
+2025-09-09 09:02:22.720 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__AddMinutes_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT DISTINCT "h"."TaskItemId"
+FROM "History" AS "h"
+WHERE instr("h"."Action", 'Status') > 0 AND "h"."AtUtc" >= @__AddMinutes_0
+2025-09-09 09:03:22.708 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__dueWindow_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."AssignedUserId", "t"."CreatedAtUtc", "t"."Description", "t"."DueAtUtc", "t"."Priority", "t"."Status", "t"."Title"
+FROM "Tasks" AS "t"
+WHERE "t"."DueAtUtc" IS NOT NULL AND "t"."DueAtUtc" <= @__dueWindow_0 AND "t"."Status" <> 3
+2025-09-09 09:03:22.708 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__AddMinutes_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT DISTINCT "h"."TaskItemId"
+FROM "History" AS "h"
+WHERE instr("h"."Action", 'Status') > 0 AND "h"."AtUtc" >= @__AddMinutes_0
+2025-09-09 09:04:22.723 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__dueWindow_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."AssignedUserId", "t"."CreatedAtUtc", "t"."Description", "t"."DueAtUtc", "t"."Priority", "t"."Status", "t"."Title"
+FROM "Tasks" AS "t"
+WHERE "t"."DueAtUtc" IS NOT NULL AND "t"."DueAtUtc" <= @__dueWindow_0 AND "t"."Status" <> 3
+2025-09-09 09:04:22.724 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__AddMinutes_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT DISTINCT "h"."TaskItemId"
+FROM "History" AS "h"
+WHERE instr("h"."Action", 'Status') > 0 AND "h"."AtUtc" >= @__AddMinutes_0
+2025-09-09 09:05:22.709 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__dueWindow_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."AssignedUserId", "t"."CreatedAtUtc", "t"."Description", "t"."DueAtUtc", "t"."Priority", "t"."Status", "t"."Title"
+FROM "Tasks" AS "t"
+WHERE "t"."DueAtUtc" IS NOT NULL AND "t"."DueAtUtc" <= @__dueWindow_0 AND "t"."Status" <> 3
+2025-09-09 09:05:22.717 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__AddMinutes_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT DISTINCT "h"."TaskItemId"
+FROM "History" AS "h"
+WHERE instr("h"."Action", 'Status') > 0 AND "h"."AtUtc" >= @__AddMinutes_0
+2025-09-09 09:06:22.722 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__dueWindow_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."AssignedUserId", "t"."CreatedAtUtc", "t"."Description", "t"."DueAtUtc", "t"."Priority", "t"."Status", "t"."Title"
+FROM "Tasks" AS "t"
+WHERE "t"."DueAtUtc" IS NOT NULL AND "t"."DueAtUtc" <= @__dueWindow_0 AND "t"."Status" <> 3
+2025-09-09 09:06:22.723 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__AddMinutes_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT DISTINCT "h"."TaskItemId"
+FROM "History" AS "h"
+WHERE instr("h"."Action", 'Status') > 0 AND "h"."AtUtc" >= @__AddMinutes_0
+2025-09-09 09:07:22.719 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__dueWindow_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."AssignedUserId", "t"."CreatedAtUtc", "t"."Description", "t"."DueAtUtc", "t"."Priority", "t"."Status", "t"."Title"
+FROM "Tasks" AS "t"
+WHERE "t"."DueAtUtc" IS NOT NULL AND "t"."DueAtUtc" <= @__dueWindow_0 AND "t"."Status" <> 3
+2025-09-09 09:07:22.719 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__AddMinutes_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT DISTINCT "h"."TaskItemId"
+FROM "History" AS "h"
+WHERE instr("h"."Action", 'Status') > 0 AND "h"."AtUtc" >= @__AddMinutes_0
+2025-09-09 10:30:03.995 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "type" = 'table' AND "rootpage" IS NOT NULL;
+2025-09-09 10:30:04.416 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Users" AS "u")
+2025-09-09 10:30:17.030 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__username_0='?' (Size = 5)], CommandType='"Text"', CommandTimeout='30']
+SELECT "u"."Id", "u"."ManagerId", "u"."PasswordHash", "u"."Role", "u"."Username"
+FROM "Users" AS "u"
+WHERE "u"."Username" = @__username_0
+LIMIT 1
+2025-09-09 10:30:17.358 +05:30 [INF] User super authenticated as "SuperUser"
+2025-09-09 10:30:17.362 +05:30 [INF] Applying filters - Priority: null, Status: null, AssignedUserId: null
+2025-09-09 10:30:17.445 +05:30 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-09-09 10:30:17.471 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."AssignedUserId", "t"."CreatedAtUtc", "t"."Description", "t"."DueAtUtc", "t"."Priority", "t"."Status", "t"."Title", "u"."Id", "u"."ManagerId", "u"."PasswordHash", "u"."Role", "u"."Username", "c"."Id", "c"."AuthorUserId", "c"."CreatedAtUtc", "c"."TaskItemId", "c"."Text", "h"."Id", "h"."Action", "h"."ActorUserId", "h"."AtUtc", "h"."MetadataJson", "h"."TaskItemId"
+FROM "Tasks" AS "t"
+INNER JOIN "Users" AS "u" ON "t"."AssignedUserId" = "u"."Id"
+LEFT JOIN "Comments" AS "c" ON "t"."Id" = "c"."TaskItemId"
+LEFT JOIN "History" AS "h" ON "t"."Id" = "h"."TaskItemId"
+ORDER BY "t"."CreatedAtUtc", "t"."Id", "u"."Id", "c"."Id"
+2025-09-09 10:30:17.531 +05:30 [INF] Loaded 3 tasks for user super
+2025-09-09 10:30:17.538 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "u"."Id", "u"."ManagerId", "u"."PasswordHash", "u"."Role", "u"."Username"
+FROM "Users" AS "u"
+2025-09-09 10:30:17.608 +05:30 [INF] User super logged in
+2025-09-09 10:30:27.148 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__toUpdate_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."AssignedUserId", "t"."CreatedAtUtc", "t"."Description", "t"."DueAtUtc", "t"."Priority", "t"."Status", "t"."Title", "u"."Id", "u"."ManagerId", "u"."PasswordHash", "u"."Role", "u"."Username"
+FROM "Tasks" AS "t"
+INNER JOIN "Users" AS "u" ON "t"."AssignedUserId" = "u"."Id"
+WHERE "t"."Id" = @__toUpdate_Id_0
+LIMIT 1
+2025-09-09 10:30:27.178 +05:30 [INF] Task 2 updated by super
+2025-09-09 10:30:28.233 +05:30 [INF] Updated task 'Update website content' by user super
+2025-09-09 10:31:17.396 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__dueWindow_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."AssignedUserId", "t"."CreatedAtUtc", "t"."Description", "t"."DueAtUtc", "t"."Priority", "t"."Status", "t"."Title"
+FROM "Tasks" AS "t"
+WHERE "t"."DueAtUtc" IS NOT NULL AND "t"."DueAtUtc" <= @__dueWindow_0 AND "t"."Status" <> 'Completed'
+2025-09-09 10:31:17.417 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__AddMinutes_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT DISTINCT "h"."TaskItemId"
+FROM "History" AS "h"
+WHERE instr("h"."Action", 'Status') > 0 AND "h"."AtUtc" >= @__AddMinutes_0
+2025-09-09 10:32:14.342 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__toUpdate_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."AssignedUserId", "t"."CreatedAtUtc", "t"."Description", "t"."DueAtUtc", "t"."Priority", "t"."Status", "t"."Title", "u"."Id", "u"."ManagerId", "u"."PasswordHash", "u"."Role", "u"."Username"
+FROM "Tasks" AS "t"
+INNER JOIN "Users" AS "u" ON "t"."AssignedUserId" = "u"."Id"
+WHERE "t"."Id" = @__toUpdate_Id_0
+LIMIT 1
+2025-09-09 10:32:14.343 +05:30 [INF] Task 2 updated by super
+2025-09-09 10:32:15.392 +05:30 [INF] Updated task 'Update website content' by user super

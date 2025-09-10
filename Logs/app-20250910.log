@@ -2049,3 +2049,74 @@ WHERE "t"."DueAtUtc" IS NOT NULL AND "t"."DueAtUtc" <= @__dueWindow_0 AND "t"."S
 SELECT DISTINCT "h"."TaskItemId"
 FROM "History" AS "h"
 WHERE instr("h"."Action", 'Status') > 0 AND "h"."AtUtc" >= @__AddMinutes_0
+2025-09-10 14:06:09.085 +05:30 [INF] Executed DbCommand (25ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "type" = 'table' AND "rootpage" IS NOT NULL;
+2025-09-10 14:06:09.686 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Users" AS "u")
+2025-09-10 14:06:17.042 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__username_0='?' (Size = 7)], CommandType='"Text"', CommandTimeout='30']
+SELECT "u"."Id", "u"."ManagerId", "u"."PasswordHash", "u"."Role", "u"."Username"
+FROM "Users" AS "u"
+WHERE "u"."Username" = @__username_0
+LIMIT 1
+2025-09-10 14:06:17.316 +05:30 [INF] User manager authenticated as "Manager"
+2025-09-10 14:06:17.318 +05:30 [INF] Applying filters - Priority: null, Status: null, AssignedUserId: null
+2025-09-10 14:06:17.375 +05:30 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-09-10 14:06:17.396 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__current_Id_0='?' (DbType = Int32), @__current_Id_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."AssignedUserId", "t"."CreatedAtUtc", "t"."Description", "t"."DueAtUtc", "t"."Priority", "t"."Status", "t"."Title", "u"."Id", "u"."ManagerId", "u"."PasswordHash", "u"."Role", "u"."Username", "c"."Id", "c"."AuthorUserId", "c"."CreatedAtUtc", "c"."TaskItemId", "c"."Text", "h"."Id", "h"."Action", "h"."ActorUserId", "h"."AtUtc", "h"."MetadataJson", "h"."TaskItemId"
+FROM "Tasks" AS "t"
+INNER JOIN "Users" AS "u" ON "t"."AssignedUserId" = "u"."Id"
+LEFT JOIN "Comments" AS "c" ON "t"."Id" = "c"."TaskItemId"
+LEFT JOIN "History" AS "h" ON "t"."Id" = "h"."TaskItemId"
+WHERE "u"."ManagerId" = @__current_Id_0 OR "t"."AssignedUserId" = @__current_Id_1
+ORDER BY "t"."CreatedAtUtc", "t"."Id", "u"."Id", "c"."Id"
+2025-09-10 14:06:17.448 +05:30 [INF] Loaded 2 tasks for user manager
+2025-09-10 14:06:17.454 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__current_Id_0='?' (DbType = Int32), @__current_Id_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "u"."Id", "u"."ManagerId", "u"."PasswordHash", "u"."Role", "u"."Username"
+FROM "Users" AS "u"
+WHERE "u"."ManagerId" = @__current_Id_0 OR "u"."Id" = @__current_Id_1
+2025-09-10 14:06:17.566 +05:30 [INF] User manager logged in
+2025-09-10 14:07:11.337 +05:30 [INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "type" = 'table' AND "rootpage" IS NOT NULL;
+2025-09-10 14:07:11.748 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Users" AS "u")
+2025-09-10 14:07:29.143 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__username_0='?' (Size = 7)], CommandType='"Text"', CommandTimeout='30']
+SELECT "u"."Id", "u"."ManagerId", "u"."PasswordHash", "u"."Role", "u"."Username"
+FROM "Users" AS "u"
+WHERE "u"."Username" = @__username_0
+LIMIT 1
+2025-09-10 14:07:29.395 +05:30 [INF] User manager authenticated as "Manager"
+2025-09-10 14:07:29.398 +05:30 [INF] Applying filters - Priority: null, Status: null, AssignedUserId: null
+2025-09-10 14:07:29.457 +05:30 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-09-10 14:07:29.480 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__current_Id_0='?' (DbType = Int32), @__current_Id_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."AssignedUserId", "t"."CreatedAtUtc", "t"."Description", "t"."DueAtUtc", "t"."Priority", "t"."Status", "t"."Title", "u"."Id", "u"."ManagerId", "u"."PasswordHash", "u"."Role", "u"."Username", "c"."Id", "c"."AuthorUserId", "c"."CreatedAtUtc", "c"."TaskItemId", "c"."Text", "h"."Id", "h"."Action", "h"."ActorUserId", "h"."AtUtc", "h"."MetadataJson", "h"."TaskItemId"
+FROM "Tasks" AS "t"
+INNER JOIN "Users" AS "u" ON "t"."AssignedUserId" = "u"."Id"
+LEFT JOIN "Comments" AS "c" ON "t"."Id" = "c"."TaskItemId"
+LEFT JOIN "History" AS "h" ON "t"."Id" = "h"."TaskItemId"
+WHERE "u"."ManagerId" = @__current_Id_0 OR "t"."AssignedUserId" = @__current_Id_1
+ORDER BY "t"."CreatedAtUtc", "t"."Id", "u"."Id", "c"."Id"
+2025-09-10 14:07:29.528 +05:30 [INF] Loaded 2 tasks for user manager
+2025-09-10 14:07:29.534 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__current_Id_0='?' (DbType = Int32), @__current_Id_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "u"."Id", "u"."ManagerId", "u"."PasswordHash", "u"."Role", "u"."Username"
+FROM "Users" AS "u"
+WHERE "u"."ManagerId" = @__current_Id_0 OR "u"."Id" = @__current_Id_1
+2025-09-10 14:07:29.593 +05:30 [INF] User manager logged in
+2025-09-10 14:07:33.889 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__current_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "u"."Id", "u"."ManagerId", "u"."PasswordHash", "u"."Role", "u"."Username"
+FROM "Users" AS "u"
+WHERE "u"."ManagerId" = @__current_Id_0
+2025-09-10 14:07:33.970 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?' (Size = 6), @p5='?' (Size = 3), @p6='?' (Size = 8)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Tasks" ("AssignedUserId", "CreatedAtUtc", "Description", "DueAtUtc", "Priority", "Status", "Title")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6)
+RETURNING "Id";
+2025-09-10 14:07:34.003 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (Size = 7), @p1='?' (DbType = Int32), @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "History" ("Action", "ActorUserId", "AtUtc", "MetadataJson", "TaskItemId")
+VALUES (@p0, @p1, @p2, @p3, @p4)
+RETURNING "Id";
+2025-09-10 14:07:34.013 +05:30 [INF] Task New Task created by manager
+2025-09-10 14:07:34.036 +05:30 [INF] Created new task 'New Task' by user manager
+2025-09-10 14:07:36.383 +05:30 [INF] User manager logged out

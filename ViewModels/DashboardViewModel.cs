@@ -83,10 +83,14 @@ namespace WpfApp1.ViewModels
             try
             {
                 IsLoading = true;
+
+                // Store the currently selected task ID before clearing
+                var selectedTaskId = SelectedTask?.Id;
+
                 Tasks.Clear();
-                
+
                 // Debug: Log filter values
-                _logger.LogInformation("Applying filters - Priority: {Priority}, Status: {Status}, AssignedUserId: {AssignedUserId}", 
+                _logger.LogInformation("Applying filters - Priority: {Priority}, Status: {Status}, AssignedUserId: {AssignedUserId}",
                     FilterPriority, FilterStatus, FilterAssignedUserId);
                 
                 var filter = new TaskFilter
@@ -107,7 +111,18 @@ namespace WpfApp1.ViewModels
                 }
 
                 _logger.LogInformation("Loaded {Count} tasks for user {Username}", tasks.Count, _currentUser.Username);
-                
+
+                // Restore the selected task if it still exists in the filtered results
+                if (selectedTaskId.HasValue)
+                {
+                    var restoredTask = tasks.FirstOrDefault(t => t.Id == selectedTaskId.Value);
+                    SelectedTask = restoredTask; // This will be null if the task doesn't match the filter
+                }
+                else
+                {
+                    SelectedTask = null; // Clear selection if no task was selected
+                }
+
                 // Show a message if no tasks found
                 if (tasks.Count == 0)
                 {
@@ -199,14 +214,13 @@ namespace WpfApp1.ViewModels
                 var updated = await _taskService.UpdateAsync(_currentUser, SelectedTask);
                 if (updated != null)
                 {
-                    // Refresh the task in the list
-                    var index = Tasks.IndexOf(SelectedTask);
-                    if (index >= 0)
-                    {
-                        Tasks[index] = updated;
-                        SelectedTask = updated;
-                    }
-                    
+                    // Reload tasks to ensure UI reflects the current state with applied filters
+                    await LoadTasksAsync();
+
+                    // Try to restore selection to the updated task if it still matches the current filters
+                    var refreshedTask = Tasks.FirstOrDefault(t => t.Id == updated.Id);
+                    SelectedTask = refreshedTask;
+
                     MessageBox.Show("Task saved successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     _logger.LogInformation("Updated task '{Title}' by user {Username}", updated.Title, _currentUser.Username);
                 }

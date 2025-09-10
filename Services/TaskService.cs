@@ -31,10 +31,13 @@ namespace WpfApp1.Services
             toCreate.CreatedAtUtc = DateTime.UtcNow;
             _db.Tasks.Add(toCreate);
             
-            // Add history entry
+            // Save the task first to get the ID
+            await _db.SaveChangesAsync();
+            
+            // Now add history entry with the real task ID
             await AddHistoryAsync(toCreate.Id, actor.Id, "Created", null);
             
-            // Save both task and history in one transaction
+            // Save the history entry
             await _db.SaveChangesAsync();
             
             _logger.LogInformation("Task {task} created by {user}", toCreate.Title, actor.Username);

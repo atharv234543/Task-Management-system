@@ -136,7 +136,7 @@
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
                                 <StackPanel Orientation="Vertical" Margin="0,0,16,0">
                                     <TextBlock Text="Priority:" FontWeight="Medium"/>
-                                    <ComboBox SelectedItem="{Binding Priority}" Width="100" Margin="0,2,0,0">
+                                    <ComboBox SelectedValue="{Binding Priority}" SelectedValuePath="Tag" Width="100" Margin="0,2,0,0">
                                         <ComboBoxItem Content="Low" Tag="{x:Static local:Priority.Low}"/>
                                         <ComboBoxItem Content="Medium" Tag="{x:Static local:Priority.Medium}"/>
                                         <ComboBoxItem Content="High" Tag="{x:Static local:Priority.High}"/>
@@ -146,7 +146,7 @@
                                 
                                 <StackPanel Orientation="Vertical">
                                     <TextBlock Text="Status:" FontWeight="Medium"/>
-                                    <ComboBox SelectedItem="{Binding Status}" Width="120" Margin="0,2,0,0">
+                                    <ComboBox SelectedValue="{Binding Status}" SelectedValuePath="Tag" Width="120" Margin="0,2,0,0">
                                         <ComboBoxItem Content="New" Tag="{x:Static local:TaskStatus.New}"/>
                                         <ComboBoxItem Content="In Progress" Tag="{x:Static local:TaskStatus.InProgress}"/>
                                         <ComboBoxItem Content="Blocked" Tag="{x:Static local:TaskStatus.Blocked}"/>

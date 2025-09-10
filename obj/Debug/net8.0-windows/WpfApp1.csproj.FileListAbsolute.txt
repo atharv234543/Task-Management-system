@@ -181,3 +181,4 @@ D:\Dev\Projects\Desktop app\WpfApp1\WpfApp1\obj\Debug\net8.0-windows\refint\WpfA
 D:\Dev\Projects\Desktop app\WpfApp1\WpfApp1\obj\Debug\net8.0-windows\WpfApp1.pdb
 D:\Dev\Projects\Desktop app\WpfApp1\WpfApp1\obj\Debug\net8.0-windows\WpfApp1.genruntimeconfig.cache
 D:\Dev\Projects\Desktop app\WpfApp1\WpfApp1\obj\Debug\net8.0-windows\ref\WpfApp1.dll
+D:\Dev\Projects\Desktop app\WpfApp1\WpfApp1\obj\Debug\net8.0-windows\WpfApp1.sourcelink.json
